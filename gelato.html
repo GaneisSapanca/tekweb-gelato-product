@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.js"></script>
+    <title>TUGAS-VUE-GANEIS</title>
+</head>
+<body>
+    <header class="z-10 sticky top-0 bg-red-300 py-5">
+        <nav class="bg-red-300 w-9/12 mx-auto flex flex-row items-center justify-between">
+            <div class="uppercase text-lg w-1/4">
+                <a href="">
+                    <span id="Halo" class="font-extrabold text-white">GANEIS</span>
+                    <span class="font-extrabold text-red-500">SAPANCA</span>
+                </a>
+            </div>
+        
+            <div class="w-1/2 flex items-end justify-evenly">
+                <a href="#home" class="text-xl font-semibold text-white ml-4">
+                    <span>Home</span>
+                </a>
+                <a href="#gelato" class="text-xl font-semibold text-white ml-4">
+                    <span>Gelato</span>
+                </a>
+                <a href="#Contact" class="text-xl font-semibold text-white ml-4">
+                    <span>Contact</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8" id="app">
+        <div class="flex flex-wrap my-5 -mx-2">
+            <div class="w-full lg:w-3/5 min-h-screen lg:p-10 flex flex-col h-[300px]">
+                <!-- Konten untuk "product" -->
+                <h1 class="text-center text-4xl font-bold text-red-400 shadow-md mb-8">Varian Gelato</h1>
+                <div class="w-full mt-14 px-8 grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-1 lg:grid-cols-2 md:gap-x-4 xl:gap-x-4">
+                    <div v-for="(product, index) in products" :key="index" class="rounded-lg max-w-md overflow-hidden hover:bg-white shadow-md dark:bg-neutral-700 text-center">
+                        <!-- Card image -->
+                        <a href="#!">
+                            <img class="w-full h-40 object-cover rounded-t-lg" :src="product.image" alt="" />
+                        </a>
+
+                        <!-- Card body -->
+                        <div class="p-6">
+                            <!-- Title -->
+                            <h5 class="mb-2 text-lg font-semibold tracking-wide text-neutral-800 dark:text-neutral-50">
+                                {{ product.name }}
+                            </h5>
+                             <!-- Harga -->
+                             <p class="text-sm text-neutral-500 dark:text-neutral-300">Price: ${{ product.price }}</p>
+                            <!-- Buttons -->
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="#" class="text-sm font-medium bg-red-300 text-white px-3 py-1 rounded hover:bg-red-300">Tambah</a>
+                                <a href="#" class="text-sm font-medium bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Pesan</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-2/5 shadow-lg lg:p-10 flex flex-col">
+                <div class="flex flex-row items-center justify-between px-5 mt-5 border-b-2">
+                    <div>
+                        <span class="font-bold text-xl text-red-400">Jumlah Pesanan</span>
+                    </div>
+                </div>
+                <!-- Cart Items -->
+                <div class="mt-4">
+                    <!-- Replace with your cart items here -->
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Varian Chocolate</h3>
+                        <p>Harga: Rp. 25.00</p>
+                        <p>Jumlah Pesanan: 1</p>
+                        <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
+                        <button class="px-3 py-1 bg-red-300 text-white rounded hover:bg-red-300">Tambah</button>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Varian Sorbet</h3>
+                        <p>Harga: Rp. 25.00</p>
+                        <p>Jumlah Pesanan: 1</p>
+                        <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
+                        <button class="px-3 py-1 bg-red-300 text-white rounded hover:bg-red-300">Tambah</button>
+                    </div>
+                </div>
+                <!-- Checkout Button -->
+                <div class="mt-4">
+                    <button class="px-4 py-2 bg-red-300 text-white rounded hover:bg-red-300">Pesan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        const app = createApp({
+            data() {
+                return {
+                    products: [
+                        {
+                            code: 'A01',
+                            name: 'Varian Chocolate',
+                            price : '25.000',
+                            image: 'image/Varian-chocolate.jpg',
+                        },
+                        {
+                            code: 'A02',
+                            name: 'Varian Vanila',
+                            price : '20.000',
+                            image: 'image/Varian-vanila.jpg',
+                        },
+                        {
+                            code: 'B03',
+                            name: 'Varian Strawberry',
+                            price : '20.000',
+                            image: 'image/Varian-strawberry.jpg',
+                        },
+                        {
+                            code: 'B04',
+                            name: 'Varian Sorbet',
+                            price : '25.000',
+                            image: 'image/Varian-sorbet.jpg',
+                        },
+                    ],
+                };
+            },
+            methods: {
+                clearCart() {
+                    // Tambahkan logika untuk menghapus keranjang di sini
+                },
+            },
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
